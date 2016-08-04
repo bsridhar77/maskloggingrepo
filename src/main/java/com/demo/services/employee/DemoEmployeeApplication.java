@@ -25,14 +25,6 @@ public class DemoEmployeeApplication {
     }
   
    
-   /* @Bean
-    public CommonsRequestLoggingFilter requestLoggingFilter() {
-        CommonsRequestLoggingFilter crlf = new CommonsRequestLoggingFilter();
-        crlf.setIncludeClientInfo(true);
-        crlf.setIncludeQueryString(true);
-        crlf.setIncludePayload(true);
-        return crlf;
-    }*/
     
     @RequestMapping("/api")
     public String getDefault() {
