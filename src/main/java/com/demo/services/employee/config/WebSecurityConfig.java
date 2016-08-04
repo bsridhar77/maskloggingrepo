@@ -34,7 +34,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.saml.SAMLAuthenticationProvider;
 import org.springframework.security.saml.SAMLBootstrap;
 import org.springframework.security.saml.SAMLDiscovery;
@@ -159,7 +158,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Logger for SAML messages and events
     @Bean
     public SAMLDefaultLogger samlLogger() {
-        return new SAMLDefaultLogger();
+    	SAMLDefaultLogger logger=new SAMLDefaultLogger();
+    	logger.setLogMessages(true);
+    	logger.setLogErrors(true);
+        return logger;
     }
  
     // SAML 2.0 WebSSO Assertion Consumer
