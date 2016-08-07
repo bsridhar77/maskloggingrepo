@@ -3,20 +3,30 @@ package com.demo.services.employee;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.Filter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.demo.jsondemo.RequestLoggingFilter;
 import com.demo.services.employee.model.Employee;
+
+
 
 @RestController
 @SpringBootApplication
+@PropertySource({"classpath:inputfilter.properties"})
 public class DemoEmployeeApplication {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DemoEmployeeApplication.class);
@@ -24,8 +34,14 @@ public class DemoEmployeeApplication {
         SpringApplication.run(DemoEmployeeApplication.class, args);
     }
   
-   
     
+  
+    
+    @Profile("REQUEST_LOGGER")
+    @Bean
+    public Filter RequestLoggingFilter() {
+      return new RequestLoggingFilter();
+    }
     @RequestMapping("/api")
     public String getDefault() {
     	return "Welcome to Atomic API";

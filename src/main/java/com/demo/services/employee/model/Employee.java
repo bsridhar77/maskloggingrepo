@@ -11,7 +11,7 @@ public class Employee {
 		return "Employee [employeeId=" + employeeId + ", desc=" + desc + ", address=" + address + ", dept=" + dept
 				+ "]";
 	}
-	Employee(){
+	public Employee(){
 		
 	}
 	private String employeeId;
